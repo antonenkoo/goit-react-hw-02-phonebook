@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ContactForm } from './contactForm/ContactForm';
 import { ContactList } from './contactList/ContactList';
 import { nanoid } from 'nanoid';
+// import yup from 'yup';
 import styled from 'styled-components';
 
 export class App extends Component {
@@ -21,8 +22,8 @@ export class App extends Component {
   onSubmit = data => {
     console.log('onSubmit in APP');
     console.log(data);
-    if (data.name === '' || data.number === '') {
-      return;
+    if (data.name === '' || data.number === '' || data.name.includes('  ')) {
+      return  alert(`Input is still empty !`);
     }
     if (this.state.contacts.find(({ name }) => name === data.name)) {
       alert(`${data.name} is alreaady in list`);
@@ -76,6 +77,8 @@ const FormDiv = styled.div`
   border: 1px solid black;
   padding: 15px;
   width: 300px;
+  height: 110px;
+  padding-bottom: -40px;
 `;
 
 const ListStyled = styled.ul`
