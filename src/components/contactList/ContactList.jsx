@@ -12,7 +12,9 @@ export const ContactList = props => {
           <div>
             {contacts.map((contact, index) => (
               <div key={index}>
-                <li key={contact.name + contact.number}>{contact.name}</li>
+                <li key={contact.name + contact.number}>
+                  {contact.name}: {contact.number}
+                </li>
               </div>
             ))}
           </div>
@@ -21,4 +23,3 @@ export const ContactList = props => {
     </Formik>
   );
 };
-

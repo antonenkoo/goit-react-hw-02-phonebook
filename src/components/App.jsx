@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ContactForm } from './contactForm/ContactForm';
 import { ContactList } from './contactList/ContactList';
 import { nanoid } from 'nanoid';
-// import yup from 'yup';
 import styled from 'styled-components';
 
 export class App extends Component {
@@ -23,7 +22,7 @@ export class App extends Component {
     console.log('onSubmit in APP');
     console.log(data);
     if (data.name === '' || data.number === '' || data.name.includes('  ')) {
-      return  alert(`Input is still empty !`);
+      return alert(`Input is still empty !`);
     }
     if (this.state.contacts.find(({ name }) => name === data.name)) {
       alert(`${data.name} is alreaady in list`);
@@ -33,6 +32,8 @@ export class App extends Component {
           ...this.state.contacts,
           { name: data.name, number: data.number, id: nanoid() },
         ],
+
+        number: '',
       });
     }
   };
@@ -45,14 +46,11 @@ export class App extends Component {
     return (
       <>
         <h1>Phonebook</h1>
-        <FormDiv>
-          <ContactForm
-            onSubmit={this.onSubmit}
-            name={this.state.name}
-            contacts={this.state.contacts}
-          />
-        </FormDiv>
-
+        <ContactForm
+          onSubmit={this.onSubmit}
+          name={this.state.name}
+          contacts={this.state.contacts}
+        />
         <h2>Contacts</h2>
         {/* <Filter
           contacts={this.state.contacts}
@@ -72,14 +70,6 @@ export class App extends Component {
     );
   }
 }
-
-const FormDiv = styled.div`
-  border: 1px solid black;
-  padding: 15px;
-  width: 300px;
-  height: 110px;
-  padding-bottom: -40px;
-`;
 
 const ListStyled = styled.ul`
   margin-left: 10px;
