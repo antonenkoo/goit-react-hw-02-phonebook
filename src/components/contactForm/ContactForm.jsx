@@ -7,20 +7,14 @@ const initialValues = {
 };
 
 export const ContactForm = props => {
-  const { name } = props;
+  // const { name } = props;
 
   const handleSubmit = (values, { resetForm }) => {
     props.onSubmit(values);
-    // console.log(values);
-    // console.log(name);
     resetForm();
-    // console.log('handleSubmit in component');
-    // console.log(values);
   };
 
-  const handleChange = () => {
-    // console.log('handleChange in component');
-  };
+  const handleChange = () => {};
 
   return (
     <Formik

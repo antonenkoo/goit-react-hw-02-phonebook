@@ -14,15 +14,13 @@ export class App extends Component {
     filter: '',
   };
 
-  handleChange = e => {
+  handleChange = () => {
     console.log('handleChange in APP');
   };
 
-  onSubmit = (event, data) => {
+  onSubmit = data => {
     console.log('onSubmit in APP');
     console.log(data);
-    console.log(event);
-    // e.preventDefault();
     if (data.name === '' || data.number === '') {
       return;
     }
