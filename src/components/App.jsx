@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { ContactForm } from './contactForm/ContactForm';
 import { ContactList } from './contactList/ContactList';
+import { Filter } from './filter/Filter';
 import { nanoid } from 'nanoid';
-import styled from 'styled-components';
+import { ListStyled } from './styles';
 
 export class App extends Component {
   state = {
-    name: 'LOL',
+    name: 'lol',
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -14,8 +15,9 @@ export class App extends Component {
     filter: '',
   };
 
-  handleChange = () => {
-    console.log('handleChange in APP');
+  onChange = e => {
+    console.log(e.target.value);
+    this.setState({ filter: e.target.value });
   };
 
   onSubmit = data => {
@@ -32,17 +34,28 @@ export class App extends Component {
           ...this.state.contacts,
           { name: data.name, number: data.number, id: nanoid() },
         ],
-
         number: '',
       });
     }
   };
 
-  onDeleteClick = () => {
-    console.log('onDelete in APP');
+  onDeleteClick = id => {
+    // console.log('onDelete in APP', id);
+    this.setState({
+      contacts: this.state.contacts.filter(contact => {
+        return contact.id !== id;
+      }),
+    });
+  };
+
+  changeFilter = () => {
+    return this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
   };
 
   render() {
+    const visibleContacts = this.changeFilter();
     return (
       <>
         <h1>Phonebook</h1>
@@ -52,16 +65,16 @@ export class App extends Component {
           contacts={this.state.contacts}
         />
         <h2>Contacts</h2>
-        {/* <Filter
-          contacts={this.state.contacts}
-          value={this.state.filter}
-          onChange={this.onFilterChange}
-          onDeleteClick={this.onDeleteClick}
-        /> */}
         <ListStyled>
+          <Filter
+            contacts={this.state.contacts}
+            value={this.state.filter}
+            onChange={this.onChange}
+            onDeleteClick={this.onDeleteClick}
+          />
           <ContactList
             filterValue={this.state.filter}
-            contacts={this.state.contacts}
+            contacts={visibleContacts}
             onDeleteClick={this.onDeleteClick}
             state={this.state}
           />
@@ -70,11 +83,3 @@ export class App extends Component {
     );
   }
 }
-
-const ListStyled = styled.ul`
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-`;

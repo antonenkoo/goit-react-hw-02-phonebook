@@ -1,7 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
+import {
+  Div,
+  FormStyled,
+  LabelStyled,
+  InputStyled,
+  ErrorMessageStyled,
+  ButtonStyled,
+} from '../styles.jsx';
 
 const initialValues = {
   name: '',
@@ -57,35 +64,3 @@ export const ContactForm = props => {
     </Formik>
   );
 };
-
-const Div = styled.div`
-  border: 1px solid black;
-  padding: 15px;
-  width: 300px;
-`;
-
-const InputStyled = styled(Field)`
-  margin: 5px 0px;
-`;
-
-const FormStyled = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const LabelStyled = styled.label`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ButtonStyled = styled.button`
-  margin-top: 20px;
-`;
-
-const ErrorMessageStyled = styled(ErrorMessage)`
-  color: #ffffff;
-  border-radius: 4px;
-  background-color: #ff0000;
-  padding: 4px;
-`;
