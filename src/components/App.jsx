@@ -7,7 +7,6 @@ import { ListStyled } from './styles';
 
 export class App extends Component {
   state = {
-    name: 'lol',
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -34,13 +33,11 @@ export class App extends Component {
           ...this.state.contacts,
           { name: data.name, number: data.number, id: nanoid() },
         ],
-        number: '',
       });
     }
   };
 
   onDeleteClick = id => {
-    // console.log('onDelete in APP', id);
     this.setState({
       contacts: this.state.contacts.filter(contact => {
         return contact.id !== id;

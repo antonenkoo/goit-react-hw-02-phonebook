@@ -37,14 +37,11 @@ export const ContactForm = props => {
     resetForm();
   };
 
-  const handleChange = () => {};
-
   return (
     <Formik
       validationSchema={scheme}
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      onChange={handleChange}
     >
       <Div>
         <FormStyled autoComplete="off">
